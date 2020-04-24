@@ -71,6 +71,23 @@
                             <span class="as-search-results-value"></span>
                         </div>
                     </div>
+
+                    <?php
+
+                    require __DIR__ .  '/vendor/autoload.php';
+
+                    // Agrega credenciales
+                    // Produccion
+                    MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398');
+                    // Sandbox
+//                     MercadoPago\SDK::setAccessToken('TEST-8196777983571350-031822-67512cd23d704fe6dfb8670cdcd5c825-469485398');
+//                    var_dump($_GET);
+
+                    if ( $_GET['payment_status'] == 'approved') {
+                        $payment = MercadoPago\Payment::find_by_id($_GET['payment_id']);
+                    }
+//                    var_dump($payment);
+                    ?>
                     <div class="as-searchnav-placeholder" style="height: 77px;">
                         <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
                             <div class="as-accessories-filter-tile column large-6 small-3">
@@ -81,14 +98,9 @@
                                     Resumen de tu compra:
                                 </p>
                                 <p>
-                                    Pagaste: <strong> <?php echo "$" . $_GET['datos_compra']['transaction_amount']?> </strong><br/>
-                                    con: <strong> <?php echo $_GET['datos_compra']['payment_method_id']?> </strong><br/>
-                                    El pago id es : <strong> <?php echo $_GET['datos_compra']['payment_id']?> </strong><br/>
-
-                                    Collection id: <strong><?php echo $_GET['collection_id']; ?></strong><br />
-                                    Collection status: <strong><?php echo $_GET['collection_status']; ?></strong><br />
-                                    Payment method: <strong><?php echo $_GET['payment_type']; ?></strong><br />
-                                    Merchant order ID: <strong><?php echo $_GET['merchant_order_id']; ?></strong>
+                                    Pagaste: <strong> <?php echo "$" . $payment->transaction_amount ?> </strong><br/>
+                                    con: <strong> <?php echo $payment->payment_method_id ?> </strong><br/>
+                                    El pago id es : <strong> <?php echo $payment->payment_id ?> </strong><br/>
                                 </p>
                                 <h6>
                                     Gracias por tu compra!
@@ -115,6 +127,6 @@
 <hr>
 <?php var_dump($_GET); ?>
 <hr>
-<?php var_dump($_POST); ?>
+<?php var_dump($_REQUEST); ?>
 <hr>
 
