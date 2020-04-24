@@ -7,9 +7,9 @@ $urlbase = 'https://' . $_SERVER['HTTP_HOST'];
 
 // Agrega credenciales
 // Produccion
-//MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398');
+MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398');
 // Sandbox
-MercadoPago\SDK::setAccessToken('TEST-8196777983571350-031822-67512cd23d704fe6dfb8670cdcd5c825-469485398');
+//MercadoPago\SDK::setAccessToken('TEST-8196777983571350-031822-67512cd23d704fe6dfb8670cdcd5c825-469485398');
 
 // Crea un objeto de preferencia
 $preference = new MercadoPago\Preference();
