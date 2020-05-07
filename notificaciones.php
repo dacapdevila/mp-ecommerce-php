@@ -2,24 +2,60 @@
 
 require __DIR__ .  '/vendor/autoload.php';
 
-// Produccion
-MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-090914-5c508e1b02a34fcce879a999574cf5c9-469485398');
-// Sandbox
-//MercadoPago\SDK::setAccessToken('TEST-8196777983571350-031822-67512cd23d704fe6dfb8670cdcd5c825-469485398');
+// Produccion // APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398
+MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398');
 
-switch($_POST["type"]) {
+$type = isset($_GET["type"]) ? $_GET["type"] : isset($_POST["type"]) ? $_POST["type"] : null;
+$id = isset($_GET["id"]) ? $_GET["id"] : isset($_POST["id"]) ? $_POST["id"] : null;
+
+$datos = [
+    'type' => $_GET['type'],
+    'topic' => $_GET['topic'],
+    'id' => $_GET['id'],
+];
+
+if($_GET['topic']=="payment" || $_GET['topic'=="merchant_order"]){
+    file_put_contents('webhook.log', json_encode($datos) . PHP_EOL,FILE_APPEND);
+}
+
+switch ($type) {
     case "payment":
-        $payment = MercadoPago\Payment::find_by_id($_POST["id"]);
+        $payment = MercadoPago\Payment::find_by_id($id);
+        if (!empty($payment)) {
+            header("HTTP/1.1 200 OK");
+
+        } else {
+            header("HTTP/1.1 400 NOT_OK");
+        }
         break;
     case "plan":
-        $plan = MercadoPago\Plan::find_by_id($_POST["id"]);
+        $plan = MercadoPago\Plan::find_by_id($id);
+        if (!empty($plan)) {
+            header("HTTP/1.1 200 OK");
+        } else {
+            header("HTTP/1.1 400 NOT_OK");
+        }
         break;
     case "subscription":
-        $plan = MercadoPago\Subscription::find_by_id($_POST["id"]);
+        $plan = MercadoPago\Subscription::find_by_id($id);
+        if (!empty($plan)) {
+            header("HTTP/1.1 200 OK");
+        } else {
+            header("HTTP/1.1 400 NOT_OK");
+        }
         break;
     case "invoice":
-        $plan = MercadoPago\Invoice::find_by_id($_POST["id"]);
+        $plan = MercadoPago\Invoice::find_by_id($id);
+        if (!empty($plan)) {
+            header("HTTP/1.1 200 OK");
+        } else {
+            header("HTTP/1.1 400 NOT_OK");
+        }
         break;
+    default:
+        header("HTTP/1.1 200 OK");
+        break;
+
 }
 
 ?>
