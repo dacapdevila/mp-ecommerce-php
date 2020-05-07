@@ -99,9 +99,8 @@
                                     Pagaste: <strong> <?php echo "$" . $payment->transaction_amount ?> </strong><br/>
                                     con: <strong> <?php echo $payment->payment_method_id ?> </strong><br/>
                                     El pago id es : <strong> <?php echo $payment->payment_id ?> </strong><br/>
-                                    Referencia externa: <?php echo $_GET['external_reference'] ?></strong><br/>
-                                    Numero de orden: <?php echo $payment->order->id ?></strong><br/>
-                                    Operacion: <?php echo $_GET['collection_id'] ?></strong>
+                                    Referencia externa: <strong> <?php echo $_GET['external_reference'] ?></strong><br/>
+                                    Operacion: <strong> <?php echo $_GET['collection_id'] ?></strong>
                                 </p>
                                 <h6>
                                     Gracias por tu compra!
