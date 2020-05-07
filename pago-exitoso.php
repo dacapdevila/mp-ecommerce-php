@@ -84,7 +84,7 @@
                     if ( $_GET['payment_status'] == 'approved') {
                         $payment = MercadoPago\Payment::find_by_id($_GET['payment_id']);
                     }
-//                    var_dump($payment);
+                    var_dump($payment);
                     ?>
                     <div class="as-searchnav-placeholder" style="height: 77px;">
                         <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
@@ -99,6 +99,9 @@
                                     Pagaste: <strong> <?php echo "$" . $payment->transaction_amount ?> </strong><br/>
                                     con: <strong> <?php echo $payment->payment_method_id ?> </strong><br/>
                                     El pago id es : <strong> <?php echo $payment->payment_id ?> </strong><br/>
+                                    Referencia externa: <?php echo $_GET['external_reference'] ?></strong><br/>
+                                    Numero de orden: <?php echo $payment->order->id ?></strong><br/>
+                                    Operacion: <?php echo $_GET['collection_id'] ?></strong>
                                 </p>
                                 <h6>
                                     Gracias por tu compra!
